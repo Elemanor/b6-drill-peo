@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B6 Energy Conservation — 25-Step Flashcard Drill</title>
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f7;
+    --color-background-info: #e8f0fe;
+    --color-text-primary: #1d1d1f;
+    --color-text-secondary: #6e6e73;
+    --color-text-tertiary: #999;
+    --color-text-info: #1a56db;
+    --color-border-tertiary: #d2d2d7;
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #f0f0f5;
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+  }
+  .container {
+    width: 100%;
+    max-width: 640px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-primary);
+  }
+  .subtitle {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+  button {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    font-family: inherit;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  button:hover {
+    background: var(--color-background-secondary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  button:active {
+    transform: scale(0.97);
+  }
+  #card-numbers {
+    white-space: pre-wrap;
+  }
+  @media (max-width: 500px) {
+    body { padding: 1rem 0.5rem; }
+    #card { padding: 1rem !important; min-height: 320px !important; }
+    #grade-row button { padding: 8px 12px !important; font-size: 13px !important; }
+    h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>B6 — 25-Step Flashcard Drill</h1>
+<p class="subtitle">Building Energy Conservation &bull; 5 Questions &bull; PEO Exam Prep</p>
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 1rem;gap:12px;flex-wrap:wrap">
+  <div style="display:flex;gap:6px;flex-wrap:wrap" id="mode-tabs">
+    <button data-mode="all" style="padding:6px 12px;font-size:13px">All 25</button>
+    <button data-mode="q1" style="padding:6px 12px;font-size:13px">Q1</button>
+    <button data-mode="q2" style="padding:6px 12px;font-size:13px">Q2</button>
+    <button data-mode="q3" style="padding:6px 12px;font-size:13px">Q3</button>
+    <button data-mode="q4" style="padding:6px 12px;font-size:13px">Q4</button>
+    <button data-mode="q5" style="padding:6px 12px;font-size:13px">Q5</button>
+    <button data-mode="weak" style="padding:6px 12px;font-size:13px">Weak spots</button>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;font-size:13px;color:var(--color-text-secondary)">
+    <span>Card <span id="card-pos">1</span> / <span id="card-total">25</span></span>
+    <span>&middot;</span>
+    <span>Mastered <span id="mastered-count">0</span></span>
+  </div>
+</div>
+
+<div id="card" style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;min-height:380px;display:flex;flex-direction:column;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+    <span id="card-badge" style="font-size:12px;padding:4px 12px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info)">Q1 · Step 1</span>
+    <span id="card-anchor" style="font-size:13px;color:var(--color-text-secondary)">the detective</span>
+  </div>
+
+  <div id="card-title" style="font-size:18px;font-weight:500;margin:0 0 1rem;line-height:1.4">Sort the 12 months into 3 piles</div>
+
+  <div id="hidden-section" style="flex:1">
+    <div style="padding:2rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);text-align:center;color:var(--color-text-tertiary);font-size:14px;line-height:1.8">
+      Try to recall the formula, numbers, and why<br>
+      then tap reveal below
+    </div>
+  </div>
+
+  <div id="revealed-section" style="display:none;flex:1">
+    <div style="margin-bottom:1rem">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-tertiary);margin-bottom:6px">Numbers to plug in</div>
+      <div id="card-numbers" style="font-size:14px;line-height:1.6;padding:10px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-family:var(--font-mono)"></div>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-tertiary);margin-bottom:6px">Why it works</div>
+      <div id="card-why" style="font-size:14px;line-height:1.6;color:var(--color-text-secondary);font-style:italic"></div>
+    </div>
+  </div>
+</div>
+
+<div id="action-row" style="display:flex;gap:10px;margin-top:1rem;justify-content:center">
+  <button id="reveal-btn" style="padding:10px 28px;font-size:14px;flex:1;max-width:200px">Reveal</button>
+</div>
+
+<div id="grade-row" style="display:none;gap:10px;margin-top:1rem;justify-content:center;flex-wrap:wrap">
+  <button id="miss-btn" style="padding:10px 20px;font-size:14px;border-color:#E24B4A !important;color:#A32D2D">Missed it</button>
+  <button id="close-btn" style="padding:10px 20px;font-size:14px">Close, needs work</button>
+  <button id="got-btn" style="padding:10px 20px;font-size:14px;border-color:#639922 !important;color:#3B6D11">Got it</button>
+</div>
+
+<div style="display:flex;gap:10px;margin-top:1rem;justify-content:space-between;align-items:center">
+  <button id="prev-btn" style="padding:8px 16px;font-size:13px">&larr; Previous</button>
+  <button id="shuffle-btn" style="padding:8px 16px;font-size:13px">Shuffle</button>
+  <button id="next-btn" style="padding:8px 16px;font-size:13px">Next &rarr;</button>
+</div>
+
+<div id="progress-bar" style="margin-top:1rem;height:6px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden">
+  <div id="progress-fill" style="height:100%;width:0%;background:#639922;transition:width 0.3s"></div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+const CARDS = [
+  {q:1,step:1,anchor:"the detective",title:"Sort the 12 months into 3 piles",numbers:"Summer (Jun/Jul/Aug) = baseload pile\nWinter (Jan/Feb/Mar/Nov/Dec) = heating pile\nShoulder (Apr/May/Sep/Oct) = TRASH \u2014 exclude",why:"Summer has zero HDD so all gas is cooking/DHW. Winter is a clean mix. Shoulder months are half-on half-off and would bend your regression line wrong."},
+  {q:1,step:2,anchor:"the detective",title:"Average summer \u2192 baseload B",numbers:"B = (1,200 + 1,100 + 1,100) / 3\nB = 1,130 m\u00b3/month",why:"People cook and shower in December too. Baseload is a constant floor that exists 12 months \u2014 weather-independent."},
+  {q:1,step:3,anchor:"the detective",title:"Subtract B, then divide by HDD \u2192 slope",numbers:"For each winter month: (gas \u2212 1,130) \u00f7 HDD\n\u03a3(heating) \u00f7 \u03a3(HDD) = 44,550 / 4,157 = 10 m\u00b3/HDD\nGas = 10 \u00d7 HDD + 1,130",why:"You must strip out the always-on baseload first, otherwise the slope absorbs it and looks steeper than the real envelope."},
+  {q:1,step:4,anchor:"the detective",title:"Normalize HEATING only, add baseload back",numbers:"Heat_yr = 64,000 \u2212 13,560 = 50,440\n\u00d7 (4,500 / 4,858) = 46,724\n+ 13,560 = 60,284 m\u00b3/yr normalized",why:"Normalization asks \u2018what would this building use in a typical weather year?\u2019 \u2014 but only heating cares about weather. Baseload wouldn\u2019t change."},
+  {q:1,step:5,anchor:"the detective",title:"Convert \u2192 EUI \u2192 ECM paybacks",numbers:"\u00d7 10.417 \u2192 kWh, add elec, \u00f7 GFA \u2192 EUI = 256\nPayback = capital \u00f7 $savings\nBoiler: useful heat \u00d7 0.88, \u00f7 0.95, then subtract",why:"Boiler ECM trap: upgrading the furnace doesn\u2019t change building load. Useful heat stays the same, only the gas input changes."},
+
+  {q:2,step:1,anchor:"the shopping trip",title:"Input = demand \u00f7 efficiency (for each heater)",numbers:"Gas: 180,000 \u00f7 0.92 = 195,652 kWh\nGSHP: 180,000 \u00f7 3.8 = 47,368 kWh\nASHP: HSPF 9.0 \u00f7 3.412 = COP 2.64\n     180,000 \u00f7 2.64 = 68,258 kWh",why:"180,000 kWh is the OUTPUT building needs. Every heater has losses so input > output. HSPF is Btu/Wh \u2014 divide by 3.412 for clean COP."},
+  {q:2,step:2,anchor:"the shopping trip",title:"Turn each input into dollars",numbers:"Gas: \u00f7 10.417 = 18,784 m\u00b3 \u00d7 $0.30 = $5,635/yr\nGSHP: 47,368 \u00d7 $0.13 = $6,158/yr\nASHP: 68,258 \u00d7 $0.13 = $8,874/yr",why:"Electricity costs 4.3\u00d7 more per kWh than gas in Ontario. Heat pump needs COP \u2265 4.51 just to break even. GSHP at 3.8 loses."},
+  {q:2,step:3,anchor:"the shopping trip",title:"Payback uses INCREMENTAL cost",numbers:"\u0394Cap = 145,000 \u2212 18,000 = $127,000\n\u0394Savings = 5,635 \u2212 6,158 = \u2212$523/yr\nNo payback \u2014 state it honestly",why:"You were buying a furnace anyway. Only count the EXTRA cost of GSHP on top of the baseline option."},
+  {q:2,step:4,anchor:"the shopping trip",title:"VFD cube law on the fan",numbers:"Without: 15 \u00d7 3,200 = 48,000 kWh\n0.7\u00b3 = 0.343, 0.4\u00b3 = 0.064\nSum modes = 21,000 kWh\nSaved: 27,000 \u00d7 $0.13 = $3,510/yr",why:"Fan power = force \u00d7 velocity. Force rises with airflow\u00b2 (drag), velocity adds another factor. So P \u221d n\u00b3. Half speed = 1/8 power."},
+  {q:2,step:5,anchor:"the shopping trip",title:"Peak day GSHP \u2014 first law",numbers:"Qh = W + Qground\nW = 85 \u00f7 3.2 = 26.6 kW\nQground = 85 \u2212 26.6 = 58.4 kW",why:"Energy conserved. Heat delivered = compressor work + heat stolen from ground. Peak COP (3.2) < seasonal (3.8) because coldest day = biggest lift."},
+
+  {q:3,step:1,anchor:"the sun helper",title:"Hot water demand: Q = V \u00d7 \u0394T \u00d7 4.18",numbers:"9,000 L/day \u00d7 50\u00b0C \u00d7 4.18 = 1,881 MJ/day\n\u00d7 365 = 686.6 GJ/yr\n\u00f7 3.6 = 190,713 kWh/yr",why:"\u0394T = 55 \u2212 5 = 50 (not 55 alone). Water comes in at 5\u00b0C and you only heat the gap. 4.18 is water\u2019s specific heat \u2014 kJ per kg per \u00b0C."},
+  {q:3,step:2,anchor:"the sun helper",title:"Solar thermal \u2014 Hottel-Whillier",numbers:"Target = 0.50 \u00d7 190,713 = 95,357 kWh\n\u03b7 = 0.72 \u2212 5.5 \u00d7 (45 \u2212 6)/800 = 0.452\nUseful/m\u00b2 = 4.5 \u00d7 365 \u00d7 0.452 = 742\nArea = 95,357 / 742 = 130 m\u00b2",why:"Panels are hotter than the air, so heat leaks OUT while sun comes IN. Hottel-Whillier is literally sun in minus heat out. State Tin = 45\u00b0C."},
+  {q:3,step:3,anchor:"the sun helper",title:"PV: E = A \u00d7 \u03b7 \u00d7 PR \u00d7 H",numbers:"Area left = 500 \u2212 130 = 370 m\u00b2\nE = 370 \u00d7 0.20 \u00d7 0.80 \u00d7 1,642 = 97,126 kWh/yr\nkWp = 370 \u00d7 0.20 = 74\nSavings = \u00d7 $0.13 = $12,626/yr",why:"\u03b7 (20%) is the lab rating \u2014 perfect sun, 25\u00b0C, clean. PR (0.80) is the real-world tax: inverter, wiring, dust, heat, shade. Skip PR = overestimate 25%."},
+  {q:3,step:4,anchor:"the sun helper",title:"Add both \u2192 renewable fraction",numbers:"95,357 + 97,126 = 192,483 kWh/yr\n\u00f7 800,000 = 24.1%\nGap = 607,517 kWh/yr\nRoof 100% full \u2014 not net zero",why:"Thermal replaces gas, PV replaces electricity. Different jobs, zero overlap, safe to add. Like adding rent + groceries."},
+  {q:3,step:5,anchor:"the sun helper",title:"Close the gap \u2014 demand first",numbers:"Envelope upgrades + GSHP\nFa\u00e7ade PV on walls\nOff-site solar / PPA\n(This paragraph is worth marks!)",why:"Cutting the 800,000 kWh pizza in half doubles your renewable fraction with zero new panels. kWh you don\u2019t use is cheaper than kWh you generate."},
+
+  {q:4,step:1,anchor:"the sneaky thief",title:"Vent load at design: Q = \u1e41 \u00d7 Cp \u00d7 \u0394T",numbers:"2.5 m\u00b3/s \u00d7 1.2 = \u1e41 = 3.0 kg/s\n\u0394T = 22 \u2212 (\u221224) = 46\u00b0C\nQ = 3.0 \u00d7 1.005 \u00d7 46 = 138.7 kW",why:"Cp is per kg, not per m\u00b3 \u2014 so convert volume to mass first. Design \u0394T sizes the equipment for the coldest day."},
+  {q:4,step:2,anchor:"the sneaky thief",title:"ERV pre-heat: Ts = Tout + \u03b5 \u00d7 \u0394T",numbers:"Ts = \u221224 + 0.75 \u00d7 46 = 10.5\u00b0C\nRecovered = 0.75 \u00d7 138.7 = 104 kW\nCoil still needs: 34.7 kW",why:"ADD to cold side, not subtract from warm. Incoming air is the thing warming up. \u03b5 = 0.75 means it closes 75% of the temperature gap."},
+  {q:4,step:3,anchor:"the sneaky thief",title:"Annual energy: use AVERAGE temp",numbers:"\u0394T = 22 \u2212 (\u22128) = 30\u00b0C (avg)\nRecovered = 0.75 \u00d7 90.5 = 67.8 kW\n\u00d7 1,800 hrs = 122,085 kWh saved\n\u00f7 0.90 \u00f7 10.417 = 13,022 m\u00b3",why:"Most winter hours are closer to 0\u00b0C, not \u221224. Design = \u2018how big is the coil?\u2019 Average = \u2018how much money per year?\u2019 Different questions, different temps."},
+  {q:4,step:4,anchor:"the sneaky thief",title:"Three dollar columns: add & subtract",numbers:"+ Heat: 13,022 \u00d7 $0.30 = +$3,907\n+ Cool: +$134\n\u2212 Fan: 1.8 \u00d7 2,600 \u00d7 $0.13 = \u2212$608\nNet = $3,433/yr \u00b7 Payback 24.8 yr",why:"ERV adds pressure drop, so the fan motor runs harder 24/7. Forgetting the fan penalty reports savings that don\u2019t exist."},
+  {q:4,step:5,anchor:"the sneaky thief",title:"ERV vs HRV + NECB code",numbers:"ERV wins: moisture, latent, less frost\nNECB threshold: 1,500 L/s\nCSA-C439 or AHRI 1060 testing\nMin 50% sensible + bypass + frost control",why:"Ottawa: cold dry winters (ERV recovers moisture), humid summers (pre-dehums), HRVs freeze their plates below \u221215\u00b0C. Long payback is OK \u2014 code required."},
+
+  {q:5,step:1,anchor:"the stacking game",title:"Name the 3 NECB compliance paths",numbers:"1. Prescriptive \u2014 check tables\n2. Trade-off \u2014 envelope UA only\n3. Performance \u2014 full energy model\nFlexibility + cost rise in that order",why:"Code has to work for rural warehouse AND LEED tower. Prescriptive fast/rigid, performance flexible/expensive, trade-off is the middle ground."},
+  {q:5,step:2,anchor:"the stacking game",title:"Trade-off rule: UA_proposed \u2264 UA_reference",numbers:"Bad window offset with:\n\u2022 Better walls or roof\n\u2022 Better slab/foundation\n\u2022 Reduce WWR (less glass area)\nBackstop: U \u2264 2.6 for CZ 6",why:"Trade-off has no energy model, so all it can sum is conductive losses (UA). Lighting/HVAC need dynamic simulation \u2014 that\u2019s performance path only."},
+  {q:5,step:3,anchor:"the stacking game",title:"Bin method: Q = UA \u00d7 \u0394T \u00d7 hours",numbers:"Only bins BELOW 15\u00b0C\nUA = 1,200 W/K = 1.2 kW/K\nExample: \u221225\u00b0 bin \u2192 1.2 \u00d7 40 \u00d7 120 = 5,760\n\u03a3 = 89,400 kWh \u2192 9,537 m\u00b3 \u2192 $2,861/yr",why:"At Tbal internal gains exactly match losses. Above Tbal you\u2019re cooling, not heating. Including warm bins would double-count."},
+  {q:5,step:4,anchor:"the stacking game",title:"Degree-day method: Q = UA \u00d7 HDD \u00d7 24",numbers:"1.2 \u00d7 3,900 \u00d7 24 = 112,320 kWh\n\u00f7 0.90 \u00f7 10.417 \u00d7 $0.30 = $3,594/yr\n25.6% HIGHER than bin method",why:"\u00d7 24 converts degree-DAYS to degree-HOURS. UA is kW/\u00b0C so you need hours for units to cancel into kWh. Same logic as distance = speed \u00d7 time."},
+  {q:5,step:5,anchor:"the stacking game",title:"Why bin beats DD \u2014 3 reasons",numbers:"1. Night setback / variable schedules\n2. Variable COP (heat pumps \u2190 best!)\n3. Real temperature distribution\n(Bonus: capacity-limited systems)",why:"DD collapses the year into one number and assumes 24/7 at fixed efficiency. Bin keeps hour-by-hour detail, so it handles COP drops, setbacks, and switchovers."},
+];
+
+const state = {
+  mode: "all",
+  pool: [],
+  idx: 0,
+  revealed: false,
+  grades: {},
+};
+
+// Persist grades to localStorage
+const STORAGE_KEY = "b6_drill_grades";
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) state.grades = JSON.parse(saved);
+} catch(e) {}
+
+function saveGrades() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.grades)); } catch(e) {}
+}
+
+function getPool() {
+  if (state.mode === "all") return CARDS.map((_, i) => i);
+  if (state.mode === "weak") {
+    return CARDS.map((_, i) => i).filter(i => state.grades[i] === "miss" || state.grades[i] === "close");
+  }
+  const qNum = parseInt(state.mode.substring(1));
+  return CARDS.map((c, i) => c.q === qNum ? i : -1).filter(i => i >= 0);
+}
+
+function render() {
+  const pool = state.pool;
+  if (pool.length === 0) {
+    document.getElementById("card-title").textContent = "No weak spots yet \u2014 go drill some cards first";
+    document.getElementById("card-badge").textContent = "\u2014";
+    document.getElementById("card-anchor").textContent = "";
+    document.getElementById("hidden-section").style.display = "block";
+    document.getElementById("revealed-section").style.display = "none";
+    document.getElementById("action-row").style.display = "flex";
+    document.getElementById("grade-row").style.display = "none";
+    document.getElementById("card-pos").textContent = "0";
+    document.getElementById("card-total").textContent = "0";
+    return;
+  }
+  if (state.idx >= pool.length) state.idx = 0;
+  const card = CARDS[pool[state.idx]];
+  document.getElementById("card-badge").textContent = "Q" + card.q + " \u00b7 Step " + card.step;
+  document.getElementById("card-anchor").textContent = card.anchor;
+  document.getElementById("card-title").textContent = card.title;
+  document.getElementById("card-numbers").textContent = card.numbers;
+  document.getElementById("card-why").textContent = card.why;
+  document.getElementById("card-pos").textContent = (state.idx + 1).toString();
+  document.getElementById("card-total").textContent = pool.length.toString();
+
+  const cardIdx = pool[state.idx];
+  const grade = state.grades[cardIdx];
+  const badge = document.getElementById("card-badge");
+  if (grade === "got") {
+    badge.style.background = "#EAF3DE";
+    badge.style.color = "#3B6D11";
+  } else if (grade === "close") {
+    badge.style.background = "#FAEEDA";
+    badge.style.color = "#854F0B";
+  } else if (grade === "miss") {
+    badge.style.background = "#FCEBEB";
+    badge.style.color = "#A32D2D";
+  } else {
+    badge.style.background = "var(--color-background-info)";
+    badge.style.color = "var(--color-text-info)";
+  }
+
+  if (state.revealed) {
+    document.getElementById("hidden-section").style.display = "none";
+    document.getElementById("revealed-section").style.display = "block";
+    document.getElementById("action-row").style.display = "none";
+    document.getElementById("grade-row").style.display = "flex";
+  } else {
+    document.getElementById("hidden-section").style.display = "block";
+    document.getElementById("revealed-section").style.display = "none";
+    document.getElementById("action-row").style.display = "flex";
+    document.getElementById("grade-row").style.display = "none";
+  }
+
+  const masteredCount = Object.values(state.grades).filter(g => g === "got").length;
+  document.getElementById("mastered-count").textContent = masteredCount.toString();
+  document.getElementById("progress-fill").style.width = Math.round((masteredCount / CARDS.length) * 100) + "%";
+
+  document.querySelectorAll("#mode-tabs button").forEach(b => {
+    if (b.dataset.mode === state.mode) {
+      b.style.background = "var(--color-background-secondary)";
+      b.style.fontWeight = "500";
+    } else {
+      b.style.background = "transparent";
+      b.style.fontWeight = "400";
+    }
+  });
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  state.pool = getPool();
+  state.idx = 0;
+  state.revealed = false;
+  render();
+}
+
+function reveal() {
+  state.revealed = true;
+  render();
+}
+
+function grade(g) {
+  const cardIdx = state.pool[state.idx];
+  state.grades[cardIdx] = g;
+  saveGrades();
+  next();
+}
+
+function next() {
+  state.idx = (state.idx + 1) % state.pool.length;
+  state.revealed = false;
+  render();
+}
+
+function prev() {
+  state.idx = (state.idx - 1 + state.pool.length) % state.pool.length;
+  state.revealed = false;
+  render();
+}
+
+function shuffle() {
+  for (let i = state.pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [state.pool[i], state.pool[j]] = [state.pool[j], state.pool[i]];
+  }
+  state.idx = 0;
+  state.revealed = false;
+  render();
+}
+
+// Keyboard shortcuts
+document.addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    if (!state.revealed) reveal();
+  }
+  if (e.key === "ArrowRight") next();
+  if (e.key === "ArrowLeft") prev();
+  if (state.revealed) {
+    if (e.key === "1") grade("miss");
+    if (e.key === "2") grade("close");
+    if (e.key === "3") grade("got");
+  }
+});
+
+document.querySelectorAll("#mode-tabs button").forEach(b => {
+  b.addEventListener("click", () => setMode(b.dataset.mode));
+});
+document.getElementById("reveal-btn").addEventListener("click", reveal);
+document.getElementById("got-btn").addEventListener("click", () => grade("got"));
+document.getElementById("close-btn").addEventListener("click", () => grade("close"));
+document.getElementById("miss-btn").addEventListener("click", () => grade("miss"));
+document.getElementById("next-btn").addEventListener("click", next);
+document.getElementById("prev-btn").addEventListener("click", prev);
+document.getElementById("shuffle-btn").addEventListener("click", shuffle);
+
+setMode("all");
+</script>
+</body>
+</html>
